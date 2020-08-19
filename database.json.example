@@ -1,0 +1,3 @@
+{
+    "mongoUrl": "mongodb://user:pwd@localhost:27017/?authSource=tables"
+}

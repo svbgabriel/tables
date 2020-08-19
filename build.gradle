@@ -1,0 +1,19 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+}
+
+group 'br.svbgabriel'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "io.javalin:javalin:3.9.1"
+    implementation "org.slf4j:slf4j-simple:1.7.30"
+    implementation "org.mongodb:mongo-java-driver:3.12.7"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.2"
+
+}
