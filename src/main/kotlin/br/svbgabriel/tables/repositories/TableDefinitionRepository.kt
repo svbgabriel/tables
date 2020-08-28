@@ -3,8 +3,8 @@ package br.svbgabriel.tables.repositories
 import br.svbgabriel.tables.config.Database
 import br.svbgabriel.tables.config.UtilConfig
 import br.svbgabriel.tables.models.TableDefinition
-import com.mongodb.MongoClient
-import com.mongodb.MongoClientURI
+import com.mongodb.MongoClientSettings
+import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoCollection
 import com.mongodb.client.model.Filters.eq
 import io.javalin.plugin.json.JavalinJson
@@ -17,7 +17,7 @@ class TableDefinitionRepository {
 
     private val database = JavalinJson.fromJson(UtilConfig.readConfig("database.json"), Database::class.java)
 
-    private val mongoClient = MongoClient(MongoClientURI(database.mongoUrl))
+    private val mongoClient = MongoClients.create(database.mongoUrl)
 
     fun find(): List<TableDefinition> {
         return getCollection().find().toList()
@@ -44,7 +44,7 @@ class TableDefinitionRepository {
 
     private fun getCollection(): MongoCollection<TableDefinition> {
         val codecRegistry = fromRegistries(
-            MongoClient.getDefaultCodecRegistry(),
+            MongoClientSettings.getDefaultCodecRegistry(),
             fromProviders(PojoCodecProvider.builder().automatic(true).build())
         )
         return mongoClient
